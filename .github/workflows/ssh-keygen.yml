@@ -3,10 +3,10 @@ name: ssh-keygen
 on:
   workflow_dispatch:
     inputs:
-      path:
-        description: 'File path'
+      name:
+        description: 'Key name'
         required: false
-        default: '~/.ssh/id_rsa'
+        default: 'id_rsa'
       type:
         description: 'Type'
         required: false
@@ -22,10 +22,10 @@ jobs:
 
     steps:
       - name: Generate keys
-        run: ssh-keygen
+        run: ssh-keygen -f ${{ inputs.name }} -t ${{ inputs.type }} -b ${{ inputs.bit }}
 
       - name: Upload generated keys
         uses: actions/upload-artifact@v3
         with:
           name: ssh-keypair
-          path: .ssh
+          path: ~/.ssh
