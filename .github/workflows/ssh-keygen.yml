@@ -31,4 +31,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ssh-keypair
-          path: ~/.ssh
+          path: |
+            ${{ inputs.name }}
+            ${{ inputs.name }}.pub
