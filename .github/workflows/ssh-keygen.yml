@@ -24,9 +24,6 @@ jobs:
       - name: Generate keys
         run: ssh-keygen -f ${{ inputs.name }} -t ${{ inputs.type }} -b ${{ inputs.bit }}
 
-      - run: ls
-      - run: ls ~/
-
       - name: Upload generated keys
         uses: actions/upload-artifact@v3
         with:
