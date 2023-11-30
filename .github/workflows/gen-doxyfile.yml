@@ -1,6 +1,12 @@
 name: Generate Doxyfile
 
-on: [ workflow_dispatch ]
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore: [ "badges" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   gen-doxyfile:
