@@ -1,4 +1,4 @@
-name: Clone other repo
+name: Clone other repository
 
 on:
     push:
@@ -20,7 +20,9 @@ jobs:
               repository: asabon/Documents
               path: documents
 
-          - run: |
-              cd
-              pwd
-              ls
+          - run: pwd
+          - run: ls
+
+          - run: cd
+          - run: pwd
+          - run: ls
