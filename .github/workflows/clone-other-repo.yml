@@ -2,9 +2,8 @@ name: Clone other repo
 
 on:
     push:
-      branches: [ "main" ]
-    pull_request:
-      branches: [ "main" ]
+      paths:
+        - .github/workflows/clone-other-repo.yml
     workflow_dispatch:
 
 jobs:
@@ -12,16 +11,16 @@ jobs:
         runs-on: ubuntu-latest
     
         steps:
-          - name: Checkout
+          - name: Checkout current repository
             uses: actions/checkout@v3
 
-          - name: Checkout
+          - name: Checkout other repository
             uses: actions/checkout@v3
             with:
               repository: asabon/Document
               path: document
 
-          - name: Check list
-            run: |
+          - run: |
+              cd
               pwd
               ls
