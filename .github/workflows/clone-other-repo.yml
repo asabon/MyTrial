@@ -7,7 +7,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    gen-doxyfile:
+    clone-other-reposigory:
         runs-on: ubuntu-latest
     
         steps:
