@@ -25,5 +25,14 @@ jobs:
           - run: cp work/sample.md sandbox/work/
 
           - run: |
+              cd sandbox
+              git add -A
+              if ! git diff --cached --quiet; then
+                git commit -m "deploy"
+                git pull
+                git push origin master
+              fi
+
+          - run: |
               cd sandbox/work
               ls
