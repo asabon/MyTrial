@@ -13,7 +13,8 @@ jobs:
         steps:
           - name: Checkout current repository
             uses: actions/checkout@v3
-
+            with:
+              path: work
           - name: Checkout other repository
             uses: actions/checkout@v3
             with:

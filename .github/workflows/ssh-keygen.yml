@@ -1,4 +1,4 @@
-name: ssh-keygen
+name: Generate SSH-key
 
 on:
   workflow_dispatch:
