@@ -24,6 +24,12 @@ jobs:
           - run: pwd
           - run: ls
 
-          - run: cd
-          - run: pwd
-          - run: ls
+          - run: |
+              cd work
+              pwd
+              ls
+
+          - run: |
+              cd documents
+              pwd
+              ls
