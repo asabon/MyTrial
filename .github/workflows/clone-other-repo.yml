@@ -21,9 +21,9 @@ jobs:
               repository: asabon/Sandbox
               path: sandbox
 
-          - run: cp work/sample.md sandbox/
+          - run: mkdir -p sandbox/work
+          - run: cp work/sample.md sandbox/work/
 
           - run: |
-              cd sandbox
+              cd sandbox/work
               ls
-
