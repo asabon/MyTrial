@@ -27,8 +27,8 @@ jobs:
 
           - name: Setup
             run: |
-              echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/deploy_key.pem
-              chmod 600 ~/deploy_key.pem
+              echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key.pem
+              chmod 600 ~/.ssh/deploy_key.pem
 
           - run: ssh -vT git@github.com
 
