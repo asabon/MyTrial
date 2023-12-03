@@ -30,6 +30,10 @@ jobs:
               echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/deploy_key.pem
               chmod 600 ~/deploy_key.pem
 
+          - run: ssh -vT git@github.com
+
+          - run: ssh -T git@github.com
+
           - name: Deploy
             run: |
               cd sandbox
