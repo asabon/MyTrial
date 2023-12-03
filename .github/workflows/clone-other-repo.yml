@@ -31,8 +31,11 @@ jobs:
               if ! git diff --cached --quiet; then
                 git config --local user.email "github-actions@github.com"
                 git config --local user.name "github-actions"
+                echo "commit"
                 git commit -m "deploy"
+                echo "pull"
                 git pull origin main
+                echo "push"
                 git push origin main
               fi
           
