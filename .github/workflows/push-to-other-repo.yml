@@ -1,13 +1,13 @@
-name: Clone other repository
+name: Push to other repository
 
 on:
     push:
       paths:
-        - .github/workflows/clone-other-repo.yml
+        - .github/workflows/push-to-other-repo.yml
     workflow_dispatch:
 
 jobs:
-    clone-other-reposigory:
+    push-to-other-reposigory:
         runs-on: ubuntu-latest
     
         steps:
