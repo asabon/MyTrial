@@ -25,6 +25,11 @@ jobs:
           - run: mkdir -p sandbox/work
           - run: cp work/sample.md sandbox/work/
 
+          - name: Setup
+            run: |
+              echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/deploy_key.pem
+              chmod 600 ~/deploy_key.pem
+
           - name: Deploy
             run: |
               cd sandbox
