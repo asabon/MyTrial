@@ -33,7 +33,7 @@ jobs:
                 git config --local user.name "github-actions"
                 git commit -m "deploy"
                 git pull origin main
-                git push origin master
+                git push origin main
               fi
           
           - run: |
