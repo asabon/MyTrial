@@ -39,8 +39,12 @@ jobs:
                 git config --local user.name "github-actions"
                 echo "== git commit =="
                 git commit -m "deploy"
+                echo "== git diff =="
+                git diff main origin/main
                 echo "== git pull origin main =="
                 git pull origin main
+                echo "== git diff =="
+                git diff main origin/main
                 echo "== gh repo sync =="
                 gh repo sync
               fi
