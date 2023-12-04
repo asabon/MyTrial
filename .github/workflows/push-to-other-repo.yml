@@ -41,14 +41,8 @@ jobs:
                 git commit -m "deploy"
                 echo "== git pull origin main =="
                 git pull origin main
-                echo "== gh ssh-key list =="
-                gh ssh-key list
-                echo "== gh repo deploy-key list =="
-                gh repo deploy-key list
-                echo "== gh repo list =="
-                gh repo list asabon
-                echo "== gh repo view =="
-                gh repo view
+                echo "== gh repo sync =="
+                gh repo sync
               fi
           
           - run: |
