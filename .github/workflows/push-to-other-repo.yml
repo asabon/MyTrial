@@ -45,8 +45,10 @@ jobs:
                 git commit -m "deploy"
                 echo "pull"
                 git pull origin main
-                echo "sync"
-                gh repo sync
+                echo "gh repo list"
+                gh repo list
+                echo "gh repo view"
+                gh repo view
               fi
           
           - run: |
