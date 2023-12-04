@@ -46,7 +46,7 @@ jobs:
                 echo "pull"
                 git pull origin main
                 echo "gh repo list"
-                gh repo list
+                gh repo list asabon
                 echo "gh repo view"
                 gh repo view
               fi
