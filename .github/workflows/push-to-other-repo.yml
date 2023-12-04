@@ -45,6 +45,8 @@ jobs:
                 git commit -m "deploy"
                 echo "pull"
                 git pull origin main
+                echo "gh repo deploy-key list"
+                gh repo deploy-key list
                 echo "gh repo list"
                 gh repo list asabon
                 echo "gh repo view"
