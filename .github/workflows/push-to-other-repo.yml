@@ -31,7 +31,7 @@ jobs:
               GH_TOKEN: ${{ github.token }}
             run: |
               cd sandbox
-              echo "add"
+              echo "== git add -A =="
               git add -A
               if ! git diff --cached --quiet; then
                 echo "== git config =="
