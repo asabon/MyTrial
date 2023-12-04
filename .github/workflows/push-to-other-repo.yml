@@ -38,18 +38,20 @@ jobs:
               echo "add"
               git add -A
               if ! git diff --cached --quiet; then
-                echo "config"
+                echo "== git config =="
                 git config --local user.email "github-actions@github.com"
                 git config --local user.name "github-actions"
-                echo "commit"
+                echo "== git commit =="
                 git commit -m "deploy"
-                echo "pull"
+                echo "== git pull origin main =="
                 git pull origin main
-                echo "gh repo deploy-key list"
+                echo "== gh ssh-key list =="
+                gh ssh-key list
+                echo "== gh repo deploy-key list =="
                 gh repo deploy-key list
-                echo "gh repo list"
+                echo "== gh repo list =="
                 gh repo list asabon
-                echo "gh repo view"
+                echo "== gh repo view =="
                 gh repo view
               fi
           
