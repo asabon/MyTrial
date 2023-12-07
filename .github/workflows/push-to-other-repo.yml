@@ -26,7 +26,7 @@ jobs:
         run: |
           mkdir -p sandbox/work
           cd sandbox/work
-          echo ${{ GITHUB_SHA }} > sha.txt
+          echo ${{ github.sha }} > sha.txt
 
       - name: Commit files to destinagion
         run: |
