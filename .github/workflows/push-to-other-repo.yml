@@ -8,39 +8,39 @@ on:
 
 jobs:
   push-to-other-reposigory:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout current repository as source
-          uses: actions/checkout@v3
-          with:
-            path: work
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current repository as source
+        uses: actions/checkout@v3
+        with:
+          path: work
 
-        - name: Checkout other repository as destination
-          uses: actions/checkout@v3
-          with:
-            repository: asabon/Sandbox
-            path: sandbox
-            ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Checkout other repository as destination
+        uses: actions/checkout@v3
+        with:
+          repository: asabon/Sandbox
+          path: sandbox
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-        - name: Copy file to destination
-          run: |
-            mkdir -p sandbox/work
-            cd sandbox/work
-            echo ${{ GITHUB_SHA }} > sha.txt
+      - name: Copy file to destination
+        run: |
+          mkdir -p sandbox/work
+          cd sandbox/work
+          echo ${{ GITHUB_SHA }} > sha.txt
 
-        - name: Commit files to destinagion
-          run: |
-            git config --global user.email "github-actions@github.com"
-            git config --global user.name "github-actions"
-            cd sandbox
-            git add -A
-            if ! git diff --cached --quiet; then
-              git commit -a -m "Add changes"
-            fi
+      - name: Commit files to destinagion
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          cd sandbox
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -a -m "Add changes"
+          fi
 
-        - name: Push to destination
-          uses: ad-m/github-push-action@v0.8.0
-          with:
-            directory: sandbox
-            repository: asabon/Sandbox
-            ssh: true
+      - name: Push to destination
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          directory: sandbox
+          repository: asabon/Sandbox
+          ssh: true
