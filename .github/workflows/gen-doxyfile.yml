@@ -1,11 +1,14 @@
 name: Generate Doxyfile
 
-on: [ workflow_dispatch ]
+on:
+  push:
+    paths:
+      - .github/workflows/gen-doxyfile.yml
+  workflow_dispatch:
 
 jobs:
   gen-doxyfile:
     runs-on: ubuntu-latest
-
     steps:
       - name: Install Doxygen
         run: |

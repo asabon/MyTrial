@@ -1,4 +1,4 @@
-name: ssh-keygen
+name: Generate SSH-key
 
 on:
   workflow_dispatch:
@@ -19,7 +19,6 @@ on:
 jobs:
   ssh-keygen:
     runs-on: ubuntu-latest
-
     steps:
       - name: Generate keys
         run: ssh-keygen -f ${{ inputs.name }} -t ${{ inputs.type }} -b ${{ inputs.bit }}
