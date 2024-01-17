@@ -1,0 +1,27 @@
+name: change param branch
+
+on:
+  push:
+    paths:
+      - .github/workflows/change-param-branch.yml
+  workflow_dispatch:
+
+jobs:
+  change-param-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set directory name for "main" branch
+        if: ${{ github.ref_name == 'main' }}
+        run: |
+          echo "SUBDIR=main" >> $GITHUB_ENV
+          echo "GITHUB_ENV = $GITHUB_ENV"
+
+      - name: Set directory name for NOT "main" branch
+        if: ${{ github.ref_name != 'main' }}
+        run: |
+          echo "SUBDIR=work" >> $GITHUB_ENV
+          echo "GITHUB_ENV = $GITHUB_ENV"
+
+      - name: Echo current param
+        run: |
+          echo "SUBDIR = ${{ env.SUBDIR }}"
