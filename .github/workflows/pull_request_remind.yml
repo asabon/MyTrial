@@ -1,0 +1,24 @@
+name: PR Review Reminder
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 毎日 0 時に実行
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Send reminder
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_number=$(jq --raw-output .number < $GITHUB_EVENT_PATH)
+          reviewers=$(gh pr view $pr_number --json reviewRequests --jq '.reviewRequests.nodes[].login')
+          for reviewer in $reviewers; do
+            gh api -X POST /repos/:owner/:repo/issues/$pr_number/comments -f body "@${reviewer} Plese review this PR."
+          done
