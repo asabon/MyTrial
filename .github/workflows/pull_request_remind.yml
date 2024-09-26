@@ -24,5 +24,17 @@ jobs:
             exit 0
           fi
           for reviewer in $reviewers; do
-            gh api -X POST /repos/:owner/:repo/issues/$pr_number/comments -f body "@${reviewer} Plese review this PR."
+            gh api -X POST /repos/:owner/:repo/issues/$pr_number/comments -f body "@${reviewer} Plese review this PR(1)."
           done
+
+      - name: Parse comment and notify user
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          comment_body=$(jq --raw-output .comment.body < $GITHUB_EVENT_PATH)
+          user_to_notify=$(echo "$comment_body" | grep -o '@[a-zA-Z0-9_-]*' | tr -d '@')
+          if [ -n "$user_to_notify" ]; then
+            gh api -X POST /repos/:owner/:repo/issues/${{ github.event.issue.number }}/comments -f body="@${user_to_notify} Plese review this PR(2)."
+          else
+            echo "No user mentioned in the comment."
+          fi
