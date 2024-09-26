@@ -1,0 +1,40 @@
+name: PR Review Reminder
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 毎日 0 時に実行
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Send reminder
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_number=$(jq --raw-output .number < $GITHUB_EVENT_PATH)
+          reviewers=$(gh pr view $pr_number --json reviewRequests --jq '.reviewRequests.nodes[].login')
+          if [ -z "$reviewers" ]; then
+            echo "No reviewers found, skipping reminder."
+            exit 0
+          fi
+          for reviewer in $reviewers; do
+            gh api -X POST /repos/:owner/:repo/issues/$pr_number/comments -f body "@${reviewer} Plese review this PR(1)."
+          done
+
+      - name: Parse comment and notify user
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          comment_body=$(jq --raw-output .comment.body < $GITHUB_EVENT_PATH)
+          user_to_notify=$(echo "$comment_body" | grep -o '@[a-zA-Z0-9_-]*' | tr -d '@')
+          if [ -n "$user_to_notify" ]; then
+            gh api -X POST /repos/:owner/:repo/issues/${{ github.event.issue.number }}/comments -f body="@${user_to_notify} Plese review this PR(2)."
+          else
+            echo "No user mentioned in the comment."
+          fi
